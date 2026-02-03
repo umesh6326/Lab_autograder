@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Submission History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Your Submission History</h2>
+    <p>Review your past attempts, scores, and penalties:</p>
 
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Problem</th>
+            <th>Score</th>
+            <th>Penalty</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for sub in subs %}
+        <tr>
+            <td>{{ sub.title }}</td>
+            <td>{{ sub.score }}</td>
+            <td>{{ sub.penalty }}</td>
+            <td>{{ sub.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{{ url_for('list_problems') }}">Back to Problems</a> |
+    <a href="{{ url_for('scoreboard') }}">View Scoreboard</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
