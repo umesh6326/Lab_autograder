@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scoreboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Scoreboard</h2>
+    <p>Leaderboard of all students ranked by score:</p>
 
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Username</th>
+            <th>Total Score</th>
+            <th>Total Penalty</th>
+            <th>Attempts</th>
+            <th>Last Submission</th>
+        </tr>
+        {% for s in scores %}
+        <tr>
+            <td>{{ s.username }}</td>
+            <td>{{ s.total_score if s.total_score else 0 }}</td>
+            <td>{{ s.total_penalty if s.total_penalty else 0 }}</td>
+            <td>{{ s.attempts }}</td>
+            <td>{{ s.last_submission }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{{ url_for('list_problems') }}">Back to Problems</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
