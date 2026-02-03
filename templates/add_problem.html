@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Problem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Add New Problem</h2>
+    <form method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" name="title" id="title" required><br><br>
 
+        <label for="description">Description:</label><br>
+        <textarea name="description" id="description" rows="6" cols="60" required></textarea><br><br>
+
+        <label for="language">Language:</label><br>
+        <select name="language" id="language" required>
+            <option value="python">Python</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+        </select><br><br>
+
+        <button type="submit">Save Problem</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+</body>
+</html>
