@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ problem.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>{{ problem.title }}</h2>
+    <p>{{ problem.description }}</p>
 
+    <form id="codeForm" method="post" action="{{ url_for('submit_code', pid=problem.id) }}">
+        <label for="language">Select Language:</label><br>
+        <select name="language" id="language" required>
+            <option value="python">Python</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+        </select><br><br>
+
+        <label for="code">Your Code:</label><br>
+        <textarea name="code" id="code" rows="15" cols="80" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Results:</h3>
+    <pre id="output"></pre>
+
+    <br>
+    <a href="{{ url_for('list_problems') }}">Back to Problems</a> |
+    <a href="{{ url_for('scoreboard') }}">View Scoreboard</a> |
+    <a href="{{ url_for('student_history') }}">View Your Submission History</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <script>
+    document.getElementById("codeForm").addEventListener("submit", async function(e){
+        e.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {method:"POST", body:formData});
+        const result = await response.json();
+        let display = "";
+        if(result.error){
+            display = "Compilation/Execution Error:\n" + result.error;
+        } else {
+            display = "Score: " + result.score + "\nPenalty: " + result.penalty + "\n\n";
+            result.results.forEach(r => {
+                display += "Input: " + r.input + "\nOutput: " + r.output + "\nStatus: " + r.status + "\n\n";
+            });
+        }
+        document.getElementById("output").textContent = display;
+    });
+    </script>
+</body>
+</html>
