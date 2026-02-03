@@ -1,1 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Test Case</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Add Test Case for Problem #{{ pid }}</h2>
+    <form method="post">
+        <label for="input">Input:</label><br>
+        <textarea name="input" id="input" rows="4" cols="60" required></textarea><br><br>
 
+        <label for="expected_output">Expected Output:</label><br>
+        <textarea name="expected_output" id="expected_output" rows="4" cols="60" required></textarea><br><br>
+
+        <button type="submit">Save Test Case</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+</body>
+</html>
