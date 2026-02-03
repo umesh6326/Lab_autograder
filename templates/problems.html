@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Problems</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Welcome, {{ username }}</h2>
 
+    <p>Select a problem below to view details and submit your solution:</p>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Language</th>
+            <th>Action</th>
+        </tr>
+        {% for p in problems %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.title }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.language }}</td>
+            <td><a href="{{ url_for('show_problem', pid=p.id) }}">Attempt</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{{ url_for('scoreboard') }}">View Scoreboard</a> |
+    <a href="{{ url_for('student_history') }}">View Your Submission History</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
