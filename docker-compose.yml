@@ -1,1 +1,13 @@
+version: "3.9"
 
+services:
+  lab-autograder:
+    build: .
+    container_name: lab-autograder
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./lab.db:/app/lab.db   # persist database between runs
+    environment:
+      - FLASK_ENV=production
+    restart: always
